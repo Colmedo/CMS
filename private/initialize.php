@@ -4,7 +4,7 @@
  * Date: 27/06/2018
  * Time: 22:01
  */
-
+    ob_start(); // output buffering turned on
     // __FILE__ returns the current path to this file
     // dirname() returns the path to the parent directory
 
