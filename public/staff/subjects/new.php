@@ -1,14 +1,17 @@
 <?php
     require_once('../../../private/initialize.php');
 
-    $test = $_GET['test'] ?? '';
+    if (is_post_request()) {
+        // Handle form values sent by new.php
 
-    if ($test === '404') {
-        error_404();
-    } elseif ($test === '500') {
-        error_500();
-    } elseif ($test === 'redirect') {
-        redirect_to(url_for('/staff/subjects/index.php'));
+        $menu_name = $_POST['menu_name'] ?? '';
+        $position = $_POST['position'] ?? '';
+        $visible = $_POST['visible'] ?? '';
+
+        echo "Form subjects parameters<br />";
+        echo "Menu name: " . $menu_name . "<br />";
+        echo "Position: " . $position . "<br />";
+        echo "Visible: " . $visible . "<br />";
     }
 ?>
 
