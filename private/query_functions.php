@@ -25,6 +25,27 @@
         return $subject; //return array assoc
     }
 
+    function insert_subject($menu_name, $position, $visible) {
+        global $db;
+
+        $sql = "INSERT INTO subjects (menu_name, position, visible) ";
+        $sql .= "VALUES (";
+        $sql .= "'" . $menu_name . "',";
+        $sql .= "'" . $position . "',";
+        $sql .= "'" . $visible . "'";
+        $sql .= ")";
+        $result = mysqli_query($db, $sql);
+        // For INSERT statements, $result is true/false
+        if ($result) {
+            return true;
+        } else {
+            // INSERT failed
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
     function find_all_pages() {
         global $db;
 
