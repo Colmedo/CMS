@@ -98,3 +98,17 @@
 
         return $result;
     }
+
+    function find_page_by_id($id) {
+        global $db;
+
+        $sql = "SELECT * FROM pages ";
+        $sql .= "WHERE id='" . $id . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+
+        $page = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+
+        return $page;
+    }
