@@ -112,3 +112,24 @@
 
         return $page;
     }
+
+    function insert_page($page) {
+        global $db;
+
+        $sql = "INSERT INTO pages (subject_id, menu_name, position, visible) ";
+        $sql .= "VALUES (";
+        $sql .= "'" . $page['subject_id'] . "',";
+        $sql .= "'" . $page['menu_name'] . "',";
+        $sql .= "'" . $page['position'] . "',";
+        $sql .= "'" . $page['visible'] . "'";
+        $sql .= ")";
+        $result = mysqli_query($db, $sql);
+
+        if ($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }

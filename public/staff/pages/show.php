@@ -21,6 +21,10 @@
                 <dd><?php echo  h($page['menu_name']) ?></dd>
             </dl>
             <dl>
+                <dt>Subject ID</dt>
+                <dd><?php echo  h($page['subject_id']) ?></dd>
+            </dl>
+            <dl>
                 <dt>Position</dt>
                 <dd><?php echo  h($page['position']) ?></dd>
             </dl>

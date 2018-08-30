@@ -29,7 +29,7 @@
                 <dd>
                     <select name="position">
                         <?php
-                            for ($i=1; $i <= $subject_count ; $i++) {
+                            for ($i=1; $i <= $subject_count; $i++) {
                                 echo "<option value=\"{$i}\"";
                                 if ($subject['position'] == $i) {
                                     echo " selected";
