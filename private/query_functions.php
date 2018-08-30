@@ -92,7 +92,7 @@
         global $db;
 
         $sql = "SELECT * FROM pages ";
-        $sql .= "ORDER BY subject_id ASC, position ASC";
+        $sql .= "ORDER BY id ASC";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
 
@@ -106,6 +106,7 @@
         $sql .= "WHERE id='" . $id . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
 
         $page = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
@@ -116,12 +117,13 @@
     function insert_page($page) {
         global $db;
 
-        $sql = "INSERT INTO pages (subject_id, menu_name, position, visible) ";
+        $sql = "INSERT INTO pages (subject_id, menu_name, position, visible, content) ";
         $sql .= "VALUES (";
         $sql .= "'" . $page['subject_id'] . "',";
         $sql .= "'" . $page['menu_name'] . "',";
         $sql .= "'" . $page['position'] . "',";
-        $sql .= "'" . $page['visible'] . "'";
+        $sql .= "'" . $page['visible'] . "',";
+        $sql .= "'" . $page['content'] . "'";
         $sql .= ")";
         $result = mysqli_query($db, $sql);
 
@@ -141,7 +143,8 @@
         $sql .= "subject_id='" . $page['subject_id'] ."',";
         $sql .= "menu_name='" . $page['menu_name'] ."',";
         $sql .= "position='" . $page['position'] ."',";
-        $sql .= "visible='" . $page['visible'] ."' ";
+        $sql .= "visible='" . $page['visible'] ."',";
+        $sql .= "content='" . $page['content'] ."' ";
         $sql .= "WHERE id='" . $page['id'] . "' ";
         $sql .= "LIMIT 1";
 

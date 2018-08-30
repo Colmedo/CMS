@@ -31,7 +31,7 @@
 
             <form action="<?php echo url_for('/staff/pages/delete.php?id=' . h(u($page['id']))); ?>" method="post">
                 <div id="operations">
-                    <input type="submit" name="commit" value="Delete Subject" />
+                    <input type="submit" name="commit" value="Delete page" />
                 </div>
             </form>
         </div>

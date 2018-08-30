@@ -16,6 +16,7 @@
         $page['menu_name'] = $_POST['menu_name'] ?? '';
         $page['position'] = $_POST['position'] ?? '';
         $page['visible'] = $_POST['visible'] ?? '';
+        $page['content'] = $_POST['content'] ?? '';
 
         $page_set = update_page($page);
         redirect_to(url_for('/staff/pages/show.php?id=' . $page['id']));
@@ -46,17 +47,19 @@
                 <dd><input type="text" name="menu_name" value="<?php echo $page['menu_name'];?>" /></dd>
             </dl>
             <dl>
-                <dt>Subject ID</dt>
+                <dt>Subject</dt>
                 <dd>
                     <select name="subject_id">
                         <?php
-                            for ($i=1; $i <= $subject_id; $i++) {
-                                echo "<option value=\"{$i}\"";
-                                if ($page['subject_id'] == $i) {
-                                    echo " selected";
-                                }
-                                echo ">{$i}</option>";
+                        $subject_set = find_all_subjects();
+                        while ($subject = mysqli_fetch_assoc($subject_set)) {
+                            echo "<option value=\"" . h($subject['id']) . "\"";
+                            if ($page['subject_id'] == $subject['id']) {
+                                echo " selected";
                             }
+                            echo ">" . h($subject['menu_name']) ."</option>";
+                        }
+                        mysqli_free_result($subject_set);
                         ?>
                     </select>
                 </dd>
@@ -82,6 +85,12 @@
                 <dd>
                     <input type="hidden" name="visible" value="0" />
                     <input type="checkbox" name="visible" value="1" <?php if ($page['visible'] == '1') {echo ' checked';} ?> />
+                </dd>
+            </dl>
+            <dl>
+                <dt>Content</dt>
+                <dd>
+                    <textarea name="content"></textarea>
                 </dd>
             </dl>
             <div id="operations">

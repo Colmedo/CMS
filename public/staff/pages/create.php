@@ -9,6 +9,7 @@
         $page['menu_name'] = $_POST['page_name'] ?? '';
         $page['position'] = $_POST['position'] ?? '';
         $page['visible'] = $_POST['visible'] ?? '';
+        $page['content'] = $_POST['content'] ?? '';
 
         $result = insert_page($page);
         $new_id = mysqli_insert_id($db);

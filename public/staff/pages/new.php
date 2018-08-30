@@ -3,7 +3,7 @@
 
     $page_set = find_all_pages();
 
-    $page_count = mysqli_num_rows($page_set);
+    $page_count = mysqli_num_rows($page_set) + 1;
     mysqli_free_result($page_set);
 
     $page = [];
@@ -26,17 +26,19 @@
                 <dd><input type="text" name="page_name" value="" /></dd>
             </dl>
             <dl>
-                <dt>Subject ID</dt>
+                <dt>Subject</dt>
                 <dd>
                     <select name="subject_id">
                         <?php
-                        for ($i=1; $i <= $subject_id; $i++) {
-                            echo "<option value=\"{$i}\"";
-                            if ($page['subject_id'] == $i) {
+                        $subject_set = find_all_subjects();
+                        while ($subject = mysqli_fetch_assoc($subject_set)) {
+                            echo "<option value=\"" . h($subject['id'])."\"";
+                            if ($page['subject_id'] == $subject['id']) {
                                 echo " selected";
                             }
-                            echo ">{$i}</option>";
+                            echo ">" . h($subject['menu_name']) ."</option>";
                         }
+                        mysqli_free_result($subject_set);
                         ?>
                     </select>
                 </dd>
@@ -62,6 +64,12 @@
                 <dd>
                     <input type="hidden" name="visible" value="0" />
                     <input type="checkbox" name="visible" value="1" />
+                </dd>
+            </dl>
+            <dl>
+                <dt>Content</dt>
+                <dd>
+                    <textarea name="content"></textarea>
                 </dd>
             </dl>
             <div id="operations">
